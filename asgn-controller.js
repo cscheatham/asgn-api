@@ -49,10 +49,12 @@ exports.view = function (req, res) {
 
 // Update assignments
 exports.update = function (req, res) {
-    Assignment.findById(req.params.assignment_id), function(err, assignment) {
+    console.log(req.params.assignment_id);
+    Assignment.findById(req.params.assignment_id, function(err, assignment) {
         if (err) {
             res.send(err);
         }
+        console.log("found assignment");
         assignment.courseName = req.body.courseName;
         assignment.assignmentName = req.body.assignmentName;
         assignment.dueDate = req.body.dueDate;
@@ -67,7 +69,7 @@ exports.update = function (req, res) {
                 data: assignment
             })
         })
-    }
+    })
 }
 
 // Delete assignments

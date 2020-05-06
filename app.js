@@ -30,8 +30,6 @@ if (!db) {
 
 app.use('/asgn-api', routes);
 
-app.get('/', (req, res) => res.send('Hello World with Express'));
-
 app.listen(port, function () {
     console.log("Running asgn-api on port " + port);
 });
