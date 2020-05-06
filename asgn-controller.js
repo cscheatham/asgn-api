@@ -33,3 +33,55 @@ exports.new = function (req, res) {
         })
     })
 }
+
+// Retrieve assignment
+exports.view = function (req, res) {
+    Assignment.findById(req.params.assignment_id, function(err, assignment) {
+        if (err) {
+            res.json(err);
+        }
+        res.json({
+            message: "Assignment found.",
+            data: assignment
+        })
+    })
+}
+
+// Update assignments
+exports.update = function (req, res) {
+    Assignment.findById(req.params.assignment_id), function(err, assignment) {
+        if (err) {
+            res.send(err);
+        }
+        assignment.courseName = req.body.courseName;
+        assignment.assignmentName = req.body.assignmentName;
+        assignment.dueDate = req.body.dueDate;
+
+        // Save the assignment back to the database
+        assignment.save(function(err) {
+            if (err) {
+                res.json(err);
+            }
+            res.json({
+                message: "Assignment updated.",
+                data: assignment
+            })
+        })
+    }
+}
+
+// Delete assignments
+
+exports.delete = function (req, res) {
+    Assignment.remove({
+        _id: req.params.assignment_id
+    }, function(err, assignment) {
+        if (err) {
+            res.json(err);
+        }
+        res.json({
+            status: "Success",
+            message: "Assignment deleted."
+        })    
+    })
+}
