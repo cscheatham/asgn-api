@@ -5,7 +5,7 @@ var Assignment = require('./asgn-model');
 exports.index = function (req, res) {
     Assignment.get(function(err, assignments) {
         if (err) {
-            res.json(err)
+            res.json(err);
         }
         res.json({
             status: "success",
